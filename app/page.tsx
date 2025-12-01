@@ -1,6 +1,7 @@
 import Greeting from "./components/Greeting";
 import Quote from "./components/Quote";
 import WhoAreWe from "./components/WhoAreWe";
+import Instruction from "./components/Instruction";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Greeting />
       <Quote />
       <WhoAreWe />
+      <Instruction />
     </div>
   );
 }
