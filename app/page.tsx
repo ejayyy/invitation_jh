@@ -3,6 +3,7 @@ import Quote from "./components/Quote";
 import WhoAreWe from "./components/WhoAreWe";
 import CollageGallery from "./components/CollageGallery";
 import Instruction from "./components/Instruction";
+import Calendar from "./components/Calendar";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <WhoAreWe />
       <CollageGallery />
       <Instruction />
+      <Calendar />
     </div>
   );
 }
