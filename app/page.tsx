@@ -4,6 +4,7 @@ import WhoAreWe from "./components/WhoAreWe";
 import CollageGallery from "./components/CollageGallery";
 import Instruction from "./components/Instruction";
 import Calendar from "./components/Calendar";
+import Countdown from "./components/Countdown";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <CollageGallery />
       <Instruction />
       <Calendar />
+      <Countdown />
     </div>
   );
 }
