@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Instruction() {
     return (
-        <section className="flex justify-center items-center gap-8 px-32">
+        <section className="flex justify-center items-center gap-8 px-20">
             <div className="relative w-full aspect-square rounded-full overflow-hidden">
                 <Image
                     src="/instruction/broom.jpg"

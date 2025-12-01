@@ -5,7 +5,7 @@ import Instruction from "./components/Instruction";
 
 export default function Home() {
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full max-w-3xl mx-auto px-7">
       <Greeting />
       <Quote />
       <WhoAreWe />
