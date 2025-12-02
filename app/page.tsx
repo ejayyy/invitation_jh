@@ -7,6 +7,7 @@ import Calendar from "./components/Calendar";
 import Countdown from "./components/Countdown";
 import KakaoMap from "./components/KakaoMap";
 import Instagram from "./components/Instagram";
+import Accordion from "./components/Accordion";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <Countdown />
       <KakaoMap />
       <Instagram />
+      <Accordion />
     </div>
   );
 }
