@@ -5,7 +5,6 @@ export default function Instagram() {
     <section className="w-full py-20 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-          {/* 헤더 */}
           <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-200">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold">
               정수
@@ -15,8 +14,6 @@ export default function Instagram() {
               <div className="text-xs text-gray-500">서울, 대한민국</div>
             </div>
           </div>
-
-          {/* 이미지 */}
           <div className="relative aspect-square bg-gray-100">
             <Image
               src="/instagram/main.jpg"
@@ -49,7 +46,7 @@ export default function Instagram() {
               <span className="text-gray-800">We are Getting Married 💕</span>
             </div>
             <button className="text-sm text-gray-500 hover:text-gray-700">
-              댓글 23개 모두 보기
+              댓글 123개 모두 보기
             </button>
             <div className="text-xs text-gray-400 uppercase">
               2시간 전
