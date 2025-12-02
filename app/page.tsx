@@ -5,6 +5,7 @@ import CollageGallery from "./components/CollageGallery";
 import Instruction from "./components/Instruction";
 import Calendar from "./components/Calendar";
 import Countdown from "./components/Countdown";
+import KakaoMap from "./components/KakaoMap";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Instruction />
       <Calendar />
       <Countdown />
+      <KakaoMap />
     </div>
   );
 }
