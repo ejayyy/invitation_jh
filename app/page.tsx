@@ -8,6 +8,7 @@ import Countdown from "./components/Countdown";
 import KakaoMap from "./components/KakaoMap";
 import Instagram from "./components/Instagram";
 import Accordion from "./components/Accordion";
+import Finale from "./components/Finale";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <KakaoMap />
       <Instagram />
       <Accordion />
+      <Finale />
     </div>
   );
 }
