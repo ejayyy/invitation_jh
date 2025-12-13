@@ -11,7 +11,7 @@ const galleryImages = [
   { src: "/gallery/plae_0522.jpg", tall: false },
   { src: "/gallery/plae_1546.jpg", tall: false },
   { src: "/gallery/plae_1779.jpg", tall: true },
-  { src: "/gallery/plae_1788.jpg", tall: false },
+  //  { src: "/gallery/plae_1788.jpg", tall: false },
   { src: "/gallery/plae_2209.jpg", tall: false },
   { src: "/gallery/plae_3240.jpg", tall: false },
   { src: "/gallery/plae_3290.jpg", tall: true },
@@ -21,9 +21,9 @@ const galleryImages = [
   { src: "/gallery/plae_4467.jpg", tall: true },
   { src: "/gallery/plae_5265.jpg", tall: false },
   { src: "/gallery/IMG_6445.JPG", tall: false },
-  { src: "/gallery/IMG_6549.JPG", tall: false },
-  { src: "/gallery/IMG_6551.JPG", tall: false },
-  { src: "/gallery/IMG_6555.JPG", tall: false },
+  { src: "/gallery/IMG_6549.JPG", tall: true },
+  { src: "/gallery/IMG_6551.JPG", tall: true },
+  { src: "/gallery/IMG_6555.JPG", tall: true },
   { src: "/gallery/IMG_6556.JPG", tall: false },
   { src: "/gallery/IMG_6557.JPG", tall: false },
   { src: "/gallery/IMG_6558.JPG", tall: false },
@@ -87,11 +87,11 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
   const columns = useMemo(() => {
     const numColumns = 6;
     const columnHeights = new Array(numColumns).fill(0);
-    const gap = 16; // gap-4 = 16px
-    const itemWidth = 200; // 이미지 너비
+    const gap = 12; // gap-3 = 12px
+    const itemWidth = 150; // 이미지 너비
 
     return galleryImages.map((image) => {
-      const height = image.tall ? 400 : 200; // tall 이미지는 400px, 일반은 200px
+      const height = image.tall ? 300 : 150; // tall 이미지는 300px, 일반은 150px
 
       // 가장 낮은 열 찾기 (모든 열에서 자유롭게 선택)
       let minHeight = columnHeights[0];
@@ -122,11 +122,11 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
   const totalHeight = useMemo(() => {
     const numColumns = 6;
     const columnHeights = new Array(numColumns).fill(0);
-    const gap = 16;
+    const gap = 12;
 
     galleryImages.forEach((image) => {
-      const height = image.tall ? 400 : 200;
-      
+      const height = image.tall ? 300 : 150;
+
       // 가장 낮은 열 찾기
       let minHeight = columnHeights[0];
       let minColumn = 0;
@@ -136,7 +136,7 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
           minColumn = i;
         }
       }
-      
+
       columnHeights[minColumn] += height + gap;
     });
 
@@ -169,7 +169,7 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
               style={{
                 left: `${image.left}px`,
                 top: `${image.top}px`,
-                width: '200px',
+                width: '150px',
                 height: `${image.height}px`,
               }}
               onClick={() => setSelectedImage(image.src)}
@@ -184,7 +184,7 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
           ))}
         </div>
       </div>
-      
+
       {selectedImage && (
         <div
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
