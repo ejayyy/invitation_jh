@@ -92,7 +92,7 @@ interface AccordionComponentProps {
 }
 
 export default function Accordion({ className }: AccordionComponentProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndices, setOpenIndices] = useState<Set<number>>(new Set());
 
   const accordionData: AccordionItem[] = [
     {
@@ -143,7 +143,15 @@ export default function Accordion({ className }: AccordionComponentProps) {
   ];
 
   const toggleAccordion = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+    setOpenIndices((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.add(index);
+      }
+      return newSet;
+    });
   };
 
   return (
@@ -158,7 +166,7 @@ export default function Accordion({ className }: AccordionComponentProps) {
               key={index}
               title={item.title}
               accounts={item.accounts}
-              isOpen={openIndex === index}
+              isOpen={openIndices.has(index)}
               onToggle={() => toggleAccordion(index)}
             />
           ))}
