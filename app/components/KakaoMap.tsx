@@ -1,28 +1,29 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
+
 interface KakaoMapProps {
   className?: string;
 }
 
 export default function KakaoMap({ className }: KakaoMapProps) {
+
   return (
     <section className={className}>
-      <div className="text-center">
-        <h3 className="mb-2 text-lg">라마다서울신도림 호텔 14층 하늘정원</h3>
-        <h5 className="text-md">서울 구로구 신도림동 427-3</h5>
-      </div>
-      <div className="mt-10 text-center">
-        <ul>
-          <li className="font-semibold">지하철 이용 시</li>
-          <li>- 지하철 1호선, 2호선 신도림역 1번 출구 (신도림역 광장 도보10분)</li>
-          <li>- 셔틀버스 타는 곳 : 신도림역 1번 출구 앞</li>
-        </ul>
-        <ul className="mt-10">
-          <li className="font-semibold">자가용 이용 시</li>
-          <li>- 승용차 주차장 입구 : 서울특별시 구로구 신도림동 427-3</li>
-          <li>- 관광버스 주차장 입구 : 서울특별시 구로구 경인로 624</li>
-          <li>- 주차 1시간 30분 무료 , 15분당 1000원</li>
-        </ul>
+      <div className="flex justify-center gap-3">
+        <Link href="https://naver.me/GPdo0cW4" target="_blank" rel="noopener noreferrer" className="text-sm bg-neutral-200 hover:bg-neutral-300 text-neutral-800 py-2 px-3 rounded-sm flex items-center justify-center">
+          <Image src="/map/naver.png" alt="Naver Map" width={16} height={16} className="mr-2" />
+          <span>네이버지도</span>
+        </Link>
+        <Link href="https://tmap.life/27ee44f3" target="_blank" rel="noopener noreferrer" className="text-sm bg-neutral-200 hover:bg-neutral-300 text-neutral-800 py-2 px-3 rounded-sm flex items-center justify-center">
+          <Image src="/map/tmap.png" alt="Tmap" width={13} height={13} className="mr-2" />
+          <span>티맵</span>
+        </Link>
+        <Link href="https://place.map.kakao.com/1071830086" target="_blank" rel="noopener noreferrer" className="text-sm bg-neutral-200 hover:bg-neutral-300 text-neutral-800 py-2 px-3 rounded-sm flex items-center justify-center">
+          <Image src="/map/kakao.png" alt="Kakao Map" width={17} height={17} className="mr-2" />
+          <span>카카오지도</span>
+        </Link>
       </div>
     </section>
   );
