@@ -8,9 +8,11 @@ interface CalendarProps {
 
 export default function Calendar({ className }: CalendarProps) {
   const weddingDate = new Date("2026-03-08");
+  const [mounted, setMounted] = useState(false);
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
 
   useEffect(() => {
+    setMounted(true);
     setCurrentDate(new Date());
   }, []);
 
@@ -44,7 +46,7 @@ export default function Calendar({ className }: CalendarProps) {
   };
 
   const isToday = (day: number | null) => {
-    if (day === null || !currentDate) return false;
+    if (day === null || !mounted || !currentDate) return false;
     return (
       currentDate.getFullYear() === year &&
       currentDate.getMonth() === month &&

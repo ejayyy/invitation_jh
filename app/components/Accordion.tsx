@@ -24,13 +24,18 @@ interface AccordionProps {
 
 const AccordionItem: React.FC<AccordionProps> = ({ title, accounts, isOpen, onToggle }) => {
   const contentRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
 
   useEffect(() => {
-    if (contentRef.current) {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted && contentRef.current) {
       setContentHeight(isOpen ? contentRef.current.scrollHeight : 0);
     }
-  }, [isOpen, accounts]);
+  }, [isOpen, accounts, mounted]);
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -57,7 +62,8 @@ const AccordionItem: React.FC<AccordionProps> = ({ title, accounts, isOpen, onTo
 
       <div
         className="overflow-hidden transition-all duration-300"
-        style={{ height: `${contentHeight}px` }}
+        style={{ height: mounted ? `${contentHeight}px` : (isOpen ? 'auto' : '0px') }}
+        suppressHydrationWarning
       >
         <div ref={contentRef} className="p-3">
           <div className="flex flex-col gap-3">

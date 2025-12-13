@@ -55,21 +55,21 @@ export default function Countdown({ className }: CountdownProps) {
     { label: "Seconds", value: timeLeft.seconds },
   ];
 
-  // Render placeholder on server to match initial client render
+  // Render placeholder on server to match initial client render exactly
   if (!mounted) {
     return (
       <section className={`w-full ${className || ''}`}>
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex items-center justify-center gap-2 md:gap-4">
-            {[0, 1, 2, 3].map((index) => (
+            {timeUnits.map((unit, index) => (
               <Fragment key={index}>
                 <div className="rounded-xl shadow-lg md:p-6 p-3 md:p-8">
-                  <div className="md:text-2xl text-xl font-bold mb-2">00</div>
-                  <div className="text-lg md:text-xl">
-                    {index === 0 ? "Days" : index === 1 ? "Hours" : index === 2 ? "Minutes" : "Seconds"}
+                  <div className="md:text-2xl text-xl font-bold mb-2">
+                    {String(unit.value).padStart(2, "0")}
                   </div>
+                  <div className="text-lg md:text-xl">{unit.label}</div>
                 </div>
-                {index < 3 && (
+                {index < timeUnits.length - 1 && (
                   <span className="text-xl md:text-2xl font-bold">:</span>
                 )}
               </Fragment>

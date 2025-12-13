@@ -120,41 +120,21 @@ export default function Share({ className }: ShareProps) {
         }
     };
 
-    if (!mounted) {
-        return (
-            <section className={`text-center ${className || ''}`}>
-                <div className="flex justify-center gap-2 p-2 text-sm">
-                    <button
-                        className="py-2 px-3 rounded-sm flex items-center justify-center bg-[#FAE100] hover:bg-[#E6CD00] text-neutral-800 font-(family-name:--font-ibm-plex-sans-kr) opacity-50 cursor-not-allowed"
-                        disabled
-                    >
-                        <span>카카오톡</span>
-                    </button>
-                    <button
-                        className="bg-neutral-200 hover:bg-neutral-300 text-neutral-800 py-2 px-3 rounded-sm flex items-center justify-center font-(family-name:--font-ibm-plex-sans-kr)"
-                        disabled
-                    >
-                        <span>링크</span>
-                    </button>
-                </div>
-            </section>
-        );
-    }
-
     return (
         <section className={`text-center ${className || ''}`}>
             <div className="flex justify-center gap-2 p-2 text-sm">
                 <button
-                    className={`py-2 px-3 rounded-sm flex items-center justify-center bg-[#FAE100] hover:bg-[#E6CD00] text-neutral-800 font-(family-name:--font-ibm-plex-sans-kr) ${!kakaoReady ? 'opacity-50 cursor-not-allowed' : ''
+                    className={`py-2 px-3 rounded-sm flex items-center justify-center bg-[#FAE100] hover:bg-[#E6CD00] text-neutral-800 font-(family-name:--font-ibm-plex-sans-kr) ${!mounted || !kakaoReady ? 'opacity-50 cursor-not-allowed' : ''
                         }`}
                     onClick={shareToKakaoTalk}
-                    disabled={!kakaoReady}
+                    disabled={!mounted || !kakaoReady}
                 >
                     <span>카카오톡</span>
                 </button>
                 <button
                     className="bg-neutral-200 hover:bg-neutral-300 text-neutral-800 py-2 px-3 rounded-sm flex items-center justify-center font-(family-name:--font-ibm-plex-sans-kr)"
                     onClick={shareToClipboard}
+                    disabled={!mounted}
                 >
                     <span>링크</span>
                 </button>

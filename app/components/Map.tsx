@@ -61,24 +61,29 @@ export default function Map({ className }: MapProps) {
   }, [executeScript]);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     installScript();
 
-    // MutationObserver로 동적으로 추가되는 cont 요소 감지
-    const observer = new MutationObserver(() => {
-      const contElements = document.querySelectorAll('.cont');
-      contElements.forEach((el) => {
-        (el as HTMLElement).style.display = 'none';
+    // MutationObserver로 동적으로 추가되는 cont 요소 감지 (지도 컨테이너 내부만)
+    const mapContainer = document.getElementById('daumRoughmapContainer1765628711672');
+    if (mapContainer) {
+      const observer = new MutationObserver(() => {
+        const contElements = mapContainer.querySelectorAll('.cont');
+        contElements.forEach((el) => {
+          (el as HTMLElement).style.display = 'none';
+        });
       });
-    });
 
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
+      observer.observe(mapContainer, {
+        childList: true,
+        subtree: true,
+      });
 
-    return () => {
-      observer.disconnect();
-    };
+      return () => {
+        observer.disconnect();
+      };
+    }
   }, [installScript]);
 
   return (
