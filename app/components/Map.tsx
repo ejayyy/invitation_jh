@@ -3,64 +3,89 @@
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 interface MapProps {
   className?: string;
 }
 
-export default function Map({ className }: MapProps) {
-  const mapInitialized = useRef(false);
+declare global {
+  interface Window {
+    daum?: any;
+  }
+}
 
-  useEffect(() => {
-    const initMap = () => {
-      if (mapInitialized.current) return;
-      
-      if (typeof window !== 'undefined' && (window as any).daum?.roughmap?.Lander) {
-        try {
-          new (window as any).daum.roughmap.Lander({
-            timestamp: "1765628711672",
-            key: "e7u6ox4eobk",
-            mapWidth: "500",
-            mapHeight: "500"
-          }).render();
-          mapInitialized.current = true;
-        } catch (error) {
-          console.error("Failed to initialize daum map:", error);
-        }
-      }
+export default function Map({ className }: MapProps) {
+
+
+  const executeScript = useCallback(() => {
+    const scriptTag = document.createElement("script");
+    const inlineScript = document.createTextNode(`new window.daum.roughmap.Lander({
+        "timestamp" : "1765628711672",
+        "key" : "e7u6ox4eobk",
+        "mapWidth" : "100%",
+        "mapHeight" : "35z0"
+      }).render();`);
+    scriptTag.appendChild(inlineScript);
+    document.body.appendChild(scriptTag);
+
+    setTimeout(() => {
+      const contElements = document.querySelectorAll('.cont');
+      contElements.forEach((el) => {
+        (el as HTMLElement).style.display = 'none';
+      });
+    }, 500);
+  }, []);
+
+  const installScript = useCallback(() => {
+    if (window.daum?.roughmap?.cdn) {
+      return;
+    }
+
+    const protocol = window.location.protocol;
+    const cdnIdentifier = "16137cec";
+
+    window.daum = window.daum || {};
+    window.daum.roughmap = {
+      cdn: cdnIdentifier,
+      URL_KEY_DATA_LOAD_PRE: protocol + "//t1.daumcdn.net/roughmap/",
+      url_protocal: protocol,
     };
 
-    // 스크립트가 이미 로드되어 있는지 확인
-    if (typeof window !== 'undefined' && (window as any).daum?.roughmap?.Lander) {
-      initMap();
-    } else {
-      // 스크립트 로드를 기다림
-      const checkInterval = setInterval(() => {
-        if (typeof window !== 'undefined' && (window as any).daum?.roughmap?.Lander) {
-          initMap();
-          clearInterval(checkInterval);
-        }
-      }, 100);
+    const scriptUrl = `${protocol}//t1.daumcdn.net/kakaomapweb/place/jscss/roughmap/${cdnIdentifier}/roughmapLander.js`;
 
-      // 5초 후 타임아웃
-      setTimeout(() => {
-        clearInterval(checkInterval);
-      }, 5000);
+    const scriptTag = document.createElement("script");
+    scriptTag.src = scriptUrl;
+    scriptTag.onload = executeScript;
+    document.body.append(scriptTag);
+  }, [executeScript]);
 
-      return () => clearInterval(checkInterval);
-    }
-  }, []);
+  useEffect(() => {
+    installScript();
+
+    // MutationObserver로 동적으로 추가되는 cont 요소 감지
+    const observer = new MutationObserver(() => {
+      const contElements = document.querySelectorAll('.cont');
+      contElements.forEach((el) => {
+        (el as HTMLElement).style.display = 'none';
+      });
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [installScript]);
 
   return (
     <section className={className}>
-      <Script
-        charSet="UTF-8"
-        className="daum_roughmap_loader_script"
-        src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"
-        strategy="lazyOnload"
-      />
-      <div id="daumRoughmapContainer1765628711672" className="root_daum_roughmap root_daum_roughmap_landing"></div>
+      <div className="mb-5 flex justify-center">
+        <div id="daumRoughmapContainer1765628711672" className="root_daum_roughmap root_daum_roughmap_landing"></div>
+      </div>
       <div className="flex justify-center gap-3">
         <Link href="https://naver.me/GPdo0cW4" target="_blank" rel="noopener noreferrer" className="text-sm bg-neutral-200 hover:bg-neutral-300 text-neutral-800 py-2 px-3 rounded-sm flex items-center justify-center">
           <Image src="/map/naver.png" alt="Naver Map" width={16} height={16} className="mr-2" />
