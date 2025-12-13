@@ -175,14 +175,24 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
               }}
               onClick={() => setSelectedImage(image.src)}
             >
-              <Image
-                src={image.src}
-                alt={`Gallery image ${index + 1}`}
-                fill
-                className="object-cover hover:scale-110 transition-transform duration-300"
-                unoptimized
-                sizes="150px"
-              />
+              <div className="relative w-full h-full">
+                <Image
+                  src={image.src}
+                  alt={`Gallery image ${index + 1}`}
+                  fill
+                  className="object-cover hover:scale-110 transition-transform duration-300"
+                  unoptimized
+                  sizes="150px"
+                  loading="lazy"
+                  onError={(e) => {
+                    console.error(`Failed to load image: ${image.src}`, e);
+                    const target = e.target as HTMLImageElement;
+                    if (target) {
+                      target.style.display = 'none';
+                    }
+                  }}
+                />
+              </div>
             </div>
           ))}
         </div>
