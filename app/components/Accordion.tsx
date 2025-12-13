@@ -44,7 +44,7 @@ const AccordionItem: React.FC<AccordionProps> = ({ title, accounts, isOpen, onTo
         onClick={onToggle}
         className="w-full p-3 flex justify-between items-center hover:bg-neutral-100 dark:hover:bg-neutral-900"
       >
-        <span className="font-light font-(family-name:--font-ibm-plex-sans-kr)">{title}</span>
+        <span className="font-light">{title}</span>
         <svg
           className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
@@ -157,7 +157,7 @@ export default function Accordion({ className }: AccordionComponentProps) {
   return (
     <section className={className}>
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+        <h2 className="text-xl md:text-lg font-semibold text-center mb-4">
           마음 전하실 곳
         </h2>
         <div className="space-y-4">

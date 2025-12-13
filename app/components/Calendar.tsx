@@ -55,7 +55,7 @@ export default function Calendar({ className }: CalendarProps) {
     <section className={`w-full px-4 ${className || ''}`}>
       <div className="max-w-4xl mx-auto text-center">
         <div className="rounded-2xl shadow-lg p-8 md:p-12">
-          <div className="text-2xl md:text-3xl font-bold mb-8">
+          <div className="text-xl md:text-lg font-semibold mb-8">
             {year}.{String(month + 1).padStart(2, '0')}.{String(weddingDay).padStart(2, '0')}
             <br />
             일요일 오후 3시 40분
