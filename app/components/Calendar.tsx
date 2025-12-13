@@ -2,7 +2,11 @@
 
 import { useMemo } from "react";
 
-export default function Calendar() {
+interface CalendarProps {
+  className?: string;
+}
+
+export default function Calendar({ className }: CalendarProps) {
   const weddingDate = new Date("2026-03-08");
   const currentDate = new Date();
 
@@ -43,9 +47,8 @@ export default function Calendar() {
       currentDate.getDate() === day
     );
   };
-
   return (
-    <section className="w-full py-20 px-4">
+    <section className={`w-full py-20 px-4 ${className || ''}`}>
       <div className="max-w-4xl mx-auto text-center">
         <div className="rounded-2xl shadow-lg p-8 md:p-12">
           <div className="text-2xl md:text-3xl font-bold mb-8">

@@ -85,7 +85,11 @@ const AccordionItem: React.FC<AccordionProps> = ({ title, accounts, isOpen, onTo
   );
 };
 
-export default function Accordion() {
+interface AccordionComponentProps {
+  className?: string;
+}
+
+export default function Accordion({ className }: AccordionComponentProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   // 여기에 계좌 정보를 입력하세요
@@ -142,7 +146,7 @@ export default function Accordion() {
   };
 
   return (
-    <section className="w-full py-20 px-4">
+    <section className={`w-full py-20 px-4 ${className || ''}`}>
       <div className="max-w-3xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           마음 전하실 곳

@@ -1,6 +1,10 @@
-export default function Quote() {
+interface QuoteProps {
+  className?: string;
+}
+
+export default function Quote({ className }: QuoteProps) {
     return (
-        <section className="text-center leading-relaxed">
+        <section className={`text-center leading-relaxed ${className || ''}`}>
             <blockquote className="my-4">
                 <p>서로의 하루를 함께 쓰기로 했습니다.</p>
                 <p>당신을 만나 모든 시간이 사랑이 되었습니다.</p>

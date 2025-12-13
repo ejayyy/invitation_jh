@@ -8,7 +8,11 @@ declare global {
     }
 }
 
-export default function Share() {
+interface ShareProps {
+    className?: string;
+}
+
+export default function Share({ className }: ShareProps) {
     const [mounted, setMounted] = useState(false);
     const [kakaoReady, setKakaoReady] = useState(false);
 
@@ -118,7 +122,7 @@ export default function Share() {
 
     if (!mounted) {
         return (
-            <section className="text-center">
+            <section className={`text-center ${className || ''}`}>
                 <div className="flex justify-center gap-2 p-2 text-sm">
                     <button
                         className="py-2 px-3 rounded-sm flex items-center justify-center bg-[#FAE100] hover:bg-[#E6CD00] text-neutral-800 font-(family-name:--font-ibm-plex-sans-kr) opacity-50 cursor-not-allowed"
@@ -138,7 +142,7 @@ export default function Share() {
     }
 
     return (
-        <section className="text-center">
+        <section className={`text-center ${className || ''}`}>
             <div className="flex justify-center gap-2 p-2 text-sm">
                 <button
                     className={`py-2 px-3 rounded-sm flex items-center justify-center bg-[#FAE100] hover:bg-[#E6CD00] text-neutral-800 font-(family-name:--font-ibm-plex-sans-kr) ${!kakaoReady ? 'opacity-50 cursor-not-allowed' : ''

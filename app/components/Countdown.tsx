@@ -2,7 +2,11 @@
 
 import { useEffect, useState, Fragment, useMemo } from "react";
 
-export default function Countdown() {
+interface CountdownProps {
+  className?: string;
+}
+
+export default function Countdown({ className }: CountdownProps) {
   // 2026년 3월 8일 오후 3시 40분 (15:40)
   const targetDate = useMemo(() => {
     return new Date("2026-03-08T15:40:00").getTime();
@@ -49,7 +53,7 @@ export default function Countdown() {
   ];
 
   return (
-    <section className="w-full py-20 px-4">
+    <section className={`w-full py-20 px-4 ${className || ''}`}>
       <div className="max-w-4xl mx-auto text-center">
         <div className="flex items-center justify-center gap-2 md:gap-4">
           {timeUnits.map((unit, index) => (

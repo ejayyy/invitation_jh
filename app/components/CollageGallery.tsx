@@ -3,6 +3,10 @@
 import Image from "next/image";
 import { useState, useEffect, useRef, useMemo } from "react";
 
+interface CollageGalleryProps {
+  className?: string;
+}
+
 const galleryImages = [
   { src: "/gallery/plae_0522.jpg", tall: false },
   { src: "/gallery/plae_1546.jpg", tall: false },
@@ -31,7 +35,7 @@ const galleryImages = [
   { src: "/gallery/IMG_6565.JPG", tall: false },
 ];
 
-export default function CollageGallery() {
+export default function CollageGallery({ className }: CollageGalleryProps) {
   const [mounted, setMounted] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [opacity, setOpacity] = useState(1);
@@ -140,7 +144,7 @@ export default function CollageGallery() {
   }, []);
 
   return (
-    <section className="relative">
+    <section className={`relative ${className || ''}`}>
       <div className="text-center">
         <small className="tracking-[0.2em]">GALLERY</small>
         <p className="mt-2">웨딩 갤러리</p>

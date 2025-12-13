@@ -1,8 +1,12 @@
 import Image from "next/image";
 
-export default function WhoAreWe() {
+interface WhoAreWeProps {
+  className?: string;
+}
+
+export default function WhoAreWe({ className }: WhoAreWeProps) {
   return (
-    <section>
+    <section className={className}>
       <div className="relative aspect-[5/4] w-full">
         <Image
           src="/whoweare/main.jpg"

@@ -1,8 +1,12 @@
 import Image from "next/image";
 
-export default function Greeting() {
+interface GreetingProps {
+  className?: string;
+}
+
+export default function Greeting({ className }: GreetingProps) {
   return (
-    <section>
+    <section className={className}>
       <div className="text-center">
         <small className="tracking-[0.2em]">THE NEW BEGINNING</small>
         <p className="mt-2">하정수<span className="mx-2">그리고</span>정보민</p>

@@ -1,8 +1,12 @@
 "use client";
 
-export default function KakaoMap() {
+interface KakaoMapProps {
+  className?: string;
+}
+
+export default function KakaoMap({ className }: KakaoMapProps) {
   return (
-    <section>
+    <section className={className}>
       <div className="text-center">
         <h3 className="mb-2">라마다서울신도림 호텔 14층 하늘정원</h3>
         <h5>서울 구로구 신도림동 427-3</h5>

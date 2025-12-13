@@ -1,8 +1,12 @@
 import Image from "next/image";
 
-export default function Instagram() {
+interface InstagramProps {
+  className?: string;
+}
+
+export default function Instagram({ className }: InstagramProps) {
   return (
-    <section className="w-full py-20 px-4">
+    <section className={`w-full py-20 px-4 ${className || ''}`}>
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
           <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-200">
