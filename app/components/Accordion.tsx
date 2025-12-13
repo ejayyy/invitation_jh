@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 
 interface Account {
   title: string;
@@ -70,6 +71,7 @@ const AccordionItem: React.FC<AccordionProps> = ({ title, accounts, isOpen, onTo
                   onClick={() => handleCopy(`${acc.bank} ${acc.number}`)}
                   className="bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 py-2 px-3 rounded-sm text-sm flex items-center basis-2/3"
                 >
+                  <Image src={`/accordion/${acc.bank}.png`} alt={acc.bank} width={16} height={16} className="inline" />
                   <span className="text-xs ml-1 mr-2">{acc.bank}</span>
                   {acc.number}
                 </button>
@@ -92,7 +94,6 @@ interface AccordionComponentProps {
 export default function Accordion({ className }: AccordionComponentProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  // 여기에 계좌 정보를 입력하세요
   const accordionData: AccordionItem[] = [
     {
       title: "신부 측",
