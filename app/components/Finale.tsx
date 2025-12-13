@@ -16,6 +16,10 @@ export default function Finale({ className }: FinaleProps) {
             className="object-cover rounded-lg"
           />
         </div>
+        <div className="text-center mt-4 text-lg">
+          <p>빛이 머무는 자리에서 서로의 봄이 되기로 약속합니다.</p>
+          <p>소중한 발걸음으로 축복해주세요</p>
+        </div>
       </div>
     </section>
   );
