@@ -180,6 +180,8 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
                 alt={`Gallery image ${index + 1}`}
                 fill
                 className="object-cover hover:scale-110 transition-transform duration-300"
+                unoptimized
+                sizes="150px"
               />
             </div>
           ))}
