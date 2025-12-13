@@ -122,8 +122,8 @@ export default function Accordion({ className }: AccordionComponentProps) {
       accounts: [{
         title: "신랑",
         name: "하정수",
-        number: "110-427-946154",
-        bank: "신한",
+        number: "1002-234-685638",
+        bank: "우리",
       },
       {
         title: "아버지",
