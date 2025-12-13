@@ -15,7 +15,7 @@ export default function Home() {
     <div className="w-full max-w-3xl mx-auto px-7">
       <Greeting className="my-24"/>
       <Quote className="mb-24"/>
-      <WhoAreWe className="mb-24"/>
+      <WhoAreWe className="mb-34"/>
       <CollageGallery className="mb-24"/>
       <Calendar/>
       <Countdown className="mb-24"/>

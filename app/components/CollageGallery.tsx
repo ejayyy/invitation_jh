@@ -145,7 +145,7 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
 
   return (
     <section className={`relative ${className || ''}`}>
-      <div className="text-center">
+      <div className="text-center mb-4">
         <small className="tracking-[0.2em]">GALLERY</small>
         <p className="mt-2">웨딩 갤러리</p>
       </div>

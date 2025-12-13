@@ -100,7 +100,6 @@ export default function Calendar({ className }: CalendarProps) {
                           <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-red-500 flex items-center justify-center mb-1">
                             <span>{day}</span>
                           </div>
-                          <span className="text-xs md:text-sm text-red-500 font-medium">오후 3시</span>
                         </div>
                       )}
                       {!isWeddingDay(day) && <span>{day}</span>}
