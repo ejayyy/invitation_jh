@@ -155,7 +155,7 @@ export default function Accordion({ className }: AccordionComponentProps) {
   };
 
   return (
-    <section className={`w-full py-20 px-4 ${className || ''}`}>
+    <section className={className}>
       <div className="max-w-3xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           마음 전하실 곳

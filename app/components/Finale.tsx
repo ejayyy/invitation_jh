@@ -6,7 +6,7 @@ interface FinaleProps {
 
 export default function Finale({ className }: FinaleProps) {
   return (
-    <section className={`w-full py-20 px-4 ${className || ''}`}>
+    <section className={className}>
       <div className="max-w-4xl mx-auto">
         <div className="relative w-full aspect-[4/3]">
           <Image
