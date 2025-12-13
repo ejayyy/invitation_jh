@@ -15,11 +15,11 @@ export default function WhoAreWe({ className }: WhoAreWeProps) {
           className="object-cover rounded-lg"
         />
       </div>
-      <div className="flex flex-col gap-1 w-fit mx-auto mt-4">
-        <div className="grid grid-cols-[repeat(6,auto)] gap-2">
+      <div className="flex flex-col gap-2 w-fit mx-auto mt-4">
+        <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr_1fr] gap-2 max-w-md">
           <span>하후동</span><span>·</span><span>박옥분</span><span>의</span><span>아들</span><span>하정수</span>
         </div>
-        <div className="grid grid-cols-[repeat(6,auto)] gap-2">
+        <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr_1fr] gap-2 max-w-md">
           <span>정동수</span><span>·</span><span>박미경</span><span>의</span><span>딸</span><span>정보민</span>
         </div>
       </div>
