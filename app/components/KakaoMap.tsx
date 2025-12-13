@@ -11,7 +11,7 @@ export default function KakaoMap({ className }: KakaoMapProps) {
         <h3 className="mb-2">라마다서울신도림 호텔 14층 하늘정원</h3>
         <h5>서울 구로구 신도림동 427-3</h5>
       </div>
-      <div className="mt-6 text-center text-lg text-gray-600">
+      <div className="mt-6 text-center text-lg">
         <ul>
           <li className="font-semibold">지하철 이용 시</li>
           <li>- 지하철 1호선, 2호선 신도림역 1번 출구 (신도림역 광장 도보10분)</li>

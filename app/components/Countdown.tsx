@@ -53,7 +53,7 @@ export default function Countdown({ className }: CountdownProps) {
   ];
 
   return (
-    <section className={`w-full py-20 px-4 ${className || ''}`}>
+    <section className={`w-full ${className || ''}`}>
       <div className="max-w-4xl mx-auto text-center">
         <div className="flex items-center justify-center gap-2 md:gap-4">
           {timeUnits.map((unit, index) => (
