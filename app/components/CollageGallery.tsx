@@ -20,19 +20,19 @@ const galleryImages = [
   { src: "/gallery/plae_4320.jpg", tall: false },
   { src: "/gallery/plae_4467.jpg", tall: true },
   { src: "/gallery/plae_5265.jpg", tall: false },
-  { src: "/gallery/IMG_6445.JPG", tall: false },
-  { src: "/gallery/IMG_6549.JPG", tall: true },
-  { src: "/gallery/IMG_6551.JPG", tall: true },
-  { src: "/gallery/IMG_6555.JPG", tall: true },
-  { src: "/gallery/IMG_6556.JPG", tall: false },
-  { src: "/gallery/IMG_6557.JPG", tall: false },
-  { src: "/gallery/IMG_6558.JPG", tall: false },
-  { src: "/gallery/IMG_6559.JPG", tall: false },
-  { src: "/gallery/IMG_6560.JPG", tall: false },
-  { src: "/gallery/IMG_6562.JPG", tall: false },
-  { src: "/gallery/IMG_6563.JPG", tall: false },
-  { src: "/gallery/IMG_6564.JPG", tall: false },
-  { src: "/gallery/IMG_6565.JPG", tall: false },
+  { src: "/gallery/IMG_6445.jpg", tall: false },
+  { src: "/gallery/IMG_6549.jpg", tall: true },
+  { src: "/gallery/IMG_6551.jpg", tall: true },
+  { src: "/gallery/IMG_6555.jpg", tall: true },
+  { src: "/gallery/IMG_6556.jpg", tall: false },
+  { src: "/gallery/IMG_6557.jpg", tall: false },
+  { src: "/gallery/IMG_6558.jpg", tall: false },
+  { src: "/gallery/IMG_6559.jpg", tall: false },
+  { src: "/gallery/IMG_6560.jpg", tall: false },
+  { src: "/gallery/IMG_6562.jpg", tall: false },
+  { src: "/gallery/IMG_6563.jpg", tall: false },
+  { src: "/gallery/IMG_6564.jpg", tall: false },
+  { src: "/gallery/IMG_6565.jpg", tall: false },
 ];
 
 export default function CollageGallery({ className }: CollageGalleryProps) {
@@ -44,6 +44,7 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
 
   useEffect(() => {
     setMounted(true);
+    // Only show modal after mount to prevent hydration mismatch
     setShowModal(true);
   }, []);
 
@@ -149,7 +150,7 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
         <small className="tracking-[0.2em]">GALLERY</small>
         <p className="mt-2">웨딩 갤러리</p>
       </div>
-      {showModal && (
+      {mounted && showModal && (
         <div
           className="absolute top-4 right-4 bg-black/80 text-white px-4 py-2 rounded-lg text-sm z-50 pointer-events-none transition-opacity duration-300"
           style={{ opacity }}

@@ -18,8 +18,11 @@ export default function Countdown({ className }: CountdownProps) {
     minutes: 0,
     seconds: 0,
   });
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
       const difference = targetDate - now;
@@ -51,6 +54,31 @@ export default function Countdown({ className }: CountdownProps) {
     { label: "Minutes", value: timeLeft.minutes },
     { label: "Seconds", value: timeLeft.seconds },
   ];
+
+  // Render placeholder on server to match initial client render
+  if (!mounted) {
+    return (
+      <section className={`w-full ${className || ''}`}>
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="flex items-center justify-center gap-2 md:gap-4">
+            {[0, 1, 2, 3].map((index) => (
+              <Fragment key={index}>
+                <div className="rounded-xl shadow-lg md:p-6 p-3 md:p-8">
+                  <div className="md:text-2xl text-xl font-bold mb-2">00</div>
+                  <div className="text-lg md:text-xl">
+                    {index === 0 ? "Days" : index === 1 ? "Hours" : index === 2 ? "Minutes" : "Seconds"}
+                  </div>
+                </div>
+                {index < 3 && (
+                  <span className="text-xl md:text-2xl font-bold">:</span>
+                )}
+              </Fragment>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className={`w-full ${className || ''}`}>
