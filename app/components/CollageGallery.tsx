@@ -33,6 +33,17 @@ const galleryImages = [
   { src: "/gallery/IMG_6563.jpg", tall: false },
   { src: "/gallery/IMG_6564.jpg", tall: false },
   { src: "/gallery/IMG_6565.jpg", tall: false },
+  { src: "/gallery/IMG_7827.jpg", tall: false },
+  { src: "/gallery/IMG_7829.jpg", tall: false },
+  { src: "/gallery/IMG_7837.jpg", tall: false },
+  { src: "/gallery/IMG_7838.jpg", tall: false },
+  { src: "/gallery/IMG_7844.jpg", tall: false },
+  { src: "/gallery/IMG_7849.jpg", tall: false },
+  { src: "/gallery/IMG_7852.jpg", tall: false },
+  { src: "/gallery/1000066824.jpg", tall: false },
+  { src: "/gallery/1000066831.jpg", tall: false },
+  { src: "/gallery/3472591320610941264_20241130224147408.jpg", tall: false },
+  { src: "/gallery/3472591320609122384_20241130224147473.jpg", tall: false },
 ];
 
 export default function CollageGallery({ className }: CollageGalleryProps) {
