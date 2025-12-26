@@ -18,7 +18,7 @@ export default function Home() {
       <Quote className="mb-24" />
       <WhoAreWe className="mb-34" />
       <CollageGallery className="mb-24" />
-      <Calendar />
+      <Calendar className="mb-5"/>
       <Countdown className="mb-24" />
       <Map className="mb-10" />
       <Instruction className="mb-24" />
