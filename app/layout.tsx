@@ -37,7 +37,7 @@ export default function RootLayout({
         className={`${gowunBatang.className} ${chironGoRoundTC.variable} ${gowunDodum.variable} antialiased`}
       >
         {children}
-        <audio autoPlay loop muted src="/music.mp3" style={{ display: "none" }} />
+        <audio autoPlay src="/music.mp3" style={{ display: "none" }} />
       </body>
     </html>
   );
