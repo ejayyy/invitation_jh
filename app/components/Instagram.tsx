@@ -13,9 +13,9 @@ export default function Instagram({ className }: InstagramProps) {
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold">
               정수
             </div>
-            <div className="flex-1">
+            <div className="flex-1 dark:text-gray-900">
               <div className="font-semibold text-sm">jeongsu_bomin</div>
-              <div className="text-xs text-gray-500">서울, 대한민국</div>
+              <div className="text-xs">서울, 대한민국</div>
             </div>
           </div>
           <div className="relative aspect-square bg-gray-100">
@@ -42,10 +42,10 @@ export default function Instagram({ className }: InstagramProps) {
                 🔖
               </button>
             </div>
-            <div className="font-semibold text-sm">
+            <div className="font-semibold text-sm dark:text-gray-900">
               좋아요 <span className="text-gray-600">1,234개</span>
             </div>
-            <div className="text-sm">
+            <div className="text-sm dark:text-gray-900">
               <span className="font-semibold">jeongsu_bomin</span>{" "}
               <span className="text-gray-800">We are Getting Married 💕</span>
             </div>
