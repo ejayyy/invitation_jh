@@ -284,7 +284,7 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
             {/* Previous button */}
             {getCurrentImageIndex() > 0 && (
               <button
-                className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full w-12 h-12 md:w-14 md:h-14 flex items-center justify-center transition-all duration-200 z-10 shadow-lg hover:scale-110 active:scale-95 border border-white/20"
+                className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white bg-white/5 hover:bg-white/10 rounded-full w-12 h-12 md:w-14 md:h-14 flex items-center justify-center transition-all duration-200 z-10 hover:scale-110 active:scale-95 border border-white/20"
                 onClick={(e) => {
                   e.stopPropagation();
                   goToPreviousImage();
@@ -317,7 +317,7 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
             {/* Next button */}
             {getCurrentImageIndex() < galleryImages.length - 1 && (
               <button
-                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full w-12 h-12 md:w-14 md:h-14 flex items-center justify-center transition-all duration-200 z-10 shadow-lg hover:scale-110 active:scale-95 border border-white/20"
+                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white bg-white/5 hover:bg-white/10 rounded-full w-12 h-12 md:w-14 md:h-14 flex items-center justify-center transition-all duration-200 z-10 hover:scale-110 active:scale-95 border border-white/20"
                 onClick={(e) => {
                   e.stopPropagation();
                   goToNextImage();
@@ -338,7 +338,7 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
             )}
 
             <button
-              className="absolute top-4 md:top-6 right-4 md:right-6 text-white bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full w-11 h-11 md:w-12 md:h-12 flex items-center justify-center transition-all duration-200 z-10 shadow-lg hover:scale-110 active:scale-95 border border-white/20"
+              className="absolute top-4 md:top-6 right-4 md:right-6 text-white bg-white/5 hover:bg-white/10 rounded-full w-11 h-11 md:w-12 md:h-12 flex items-center justify-center transition-all duration-200 z-10 hover:scale-110 active:scale-95 border border-white/20"
               onClick={(e) => {
                 e.stopPropagation();
                 setSelectedImage(null);
