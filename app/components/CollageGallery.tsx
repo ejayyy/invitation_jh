@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 
 interface CollageGalleryProps {
   className?: string;
@@ -51,7 +51,10 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
   const [showModal, setShowModal] = useState(false);
   const [opacity, setOpacity] = useState(1);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
   useEffect(() => {
     setMounted(true);
@@ -76,25 +79,54 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
     }
   }, [mounted]);
 
+  const getCurrentImageIndex = useCallback(() => {
+    if (!selectedImage) return 0;
+    return galleryImages.findIndex(img => img.src === selectedImage);
+  }, [selectedImage]);
+
+  const goToPreviousImage = useCallback(() => {
+    const currentIndex = getCurrentImageIndex();
+    if (currentIndex > 0) {
+      const prevIndex = currentIndex - 1;
+      setSelectedImage(galleryImages[prevIndex].src);
+      setCurrentImageIndex(prevIndex);
+    }
+  }, [getCurrentImageIndex]);
+
+  const goToNextImage = useCallback(() => {
+    const currentIndex = getCurrentImageIndex();
+    if (currentIndex < galleryImages.length - 1) {
+      const nextIndex = currentIndex + 1;
+      setSelectedImage(galleryImages[nextIndex].src);
+      setCurrentImageIndex(nextIndex);
+    }
+  }, [getCurrentImageIndex]);
+
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && selectedImage) {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!selectedImage) return;
+      
+      if (e.key === 'Escape') {
         setSelectedImage(null);
+      } else if (e.key === 'ArrowLeft') {
+        goToPreviousImage();
+      } else if (e.key === 'ArrowRight') {
+        goToNextImage();
       }
     };
 
     if (selectedImage) {
-      document.addEventListener('keydown', handleEscape);
+      document.addEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
     };
-  }, [selectedImage]);
+  }, [selectedImage, goToPreviousImage, goToNextImage]);
 
   const columns = useMemo(() => {
     const numColumns = 6;
@@ -186,7 +218,11 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
                 width: '150px',
                 height: `${image.height}px`,
               }}
-              onClick={() => setSelectedImage(image.src)}
+              onClick={() => {
+                const index = galleryImages.findIndex(img => img.src === image.src);
+                setSelectedImage(image.src);
+                setCurrentImageIndex(index);
+              }}
             >
               <div className="relative w-full h-full">
                 <Image
@@ -215,27 +251,118 @@ export default function CollageGallery({ className }: CollageGalleryProps) {
         <div
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedImage(null)}
+          onTouchStart={(e) => {
+            touchStartX.current = e.touches[0].clientX;
+          }}
+          onTouchMove={(e) => {
+            touchEndX.current = e.touches[0].clientX;
+          }}
+          onTouchEnd={() => {
+            if (!touchStartX.current || !touchEndX.current) return;
+            
+            const distance = touchStartX.current - touchEndX.current;
+            const minSwipeDistance = 50;
+
+            if (Math.abs(distance) > minSwipeDistance) {
+              if (distance > 0) {
+                // Swipe left - next image
+                goToNextImage();
+              } else {
+                // Swipe right - previous image
+                goToPreviousImage();
+              }
+            }
+
+            touchStartX.current = 0;
+            touchEndX.current = 0;
+          }}
         >
           <div
             className="relative max-w-[90vw] max-h-[90vh] w-full h-full flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Previous button */}
+            {getCurrentImageIndex() > 0 && (
+              <button
+                className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full w-12 h-12 md:w-14 md:h-14 flex items-center justify-center transition-all duration-200 z-10 shadow-lg hover:scale-110 active:scale-95 border border-white/20"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToPreviousImage();
+                }}
+                aria-label="Previous image"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 md:w-7 md:h-7"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+              </button>
+            )}
+
             <Image
               src={selectedImage}
-              alt="Selected gallery image"
+              alt={`Gallery image ${getCurrentImageIndex() + 1} of ${galleryImages.length}`}
               width={2000}
               height={2000}
               className="object-contain max-w-full max-h-full"
               style={{ userSelect: 'none', pointerEvents: 'none' }}
               unoptimized
             />
+
+            {/* Next button */}
+            {getCurrentImageIndex() < galleryImages.length - 1 && (
+              <button
+                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full w-12 h-12 md:w-14 md:h-14 flex items-center justify-center transition-all duration-200 z-10 shadow-lg hover:scale-110 active:scale-95 border border-white/20"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToNextImage();
+                }}
+                aria-label="Next image"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 md:w-7 md:h-7"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+              </button>
+            )}
+
             <button
-              className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full w-10 h-10 flex items-center justify-center transition-colors z-10"
-              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 md:top-6 right-4 md:right-6 text-white bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full w-11 h-11 md:w-12 md:h-12 flex items-center justify-center transition-all duration-200 z-10 shadow-lg hover:scale-110 active:scale-95 border border-white/20"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(null);
+              }}
               aria-label="Close modal"
             >
-              ✕
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2.5}
+                stroke="currentColor"
+                className="w-5 h-5 md:w-6 md:h-6"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
+
+            {/* Image counter */}
+            <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 text-white bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-full text-sm md:text-base font-medium z-10 shadow-lg border border-white/20">
+              <span className="opacity-90">{getCurrentImageIndex() + 1}</span>
+              <span className="mx-2 opacity-50">/</span>
+              <span className="opacity-60">{galleryImages.length}</span>
+            </div>
           </div>
         </div>
       )}
